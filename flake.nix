@@ -22,10 +22,6 @@
             inherit (pkgs.python3Packages) joblib pytest future numpy scikit-learn;
           };
 
-          csharp-ls_8 = pkgs.callPackage ./csharp-ls_8/default.nix 
-          {
-          };
-
         }
       );
 }
