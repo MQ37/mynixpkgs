@@ -1,6 +1,6 @@
 { lib
 , buildPythonPackage
-, fetchgit
+, fetchFromGitHub
 , future
 , joblib
 , numpy
@@ -16,12 +16,13 @@ buildPythonPackage rec {
 
   disabled = pythonOlder "3.7";
 
-  src = fetchgit {
-    name = "mdp-toolkit";
-    url = "https://github.com/mdp-toolkit/mdp-toolkit.git";
+  src = fetchFromGitHub {
+    owner = "mdp-toolkit";
+    repo = "mdp-toolkit";
     rev = "64f14eee8af55ecba32f884710d0e52ebbeb258b";
     hash = "sha256-s6cPS6HM70tJUUAZMw6nhGyj64yNvQt+HilMENwdFHQ=";
   };
+
 
   postPatch = ''
     # https://github.com/mdp-toolkit/mdp-toolkit/issues/92
