@@ -14,13 +14,7 @@
         with pkgs;
         {
 
-          mdp-toolkit = pkgs.callPackage ./mdp-toolkit/default.nix 
-          {
-            pythonOlder = pkgs.lib.versionOlder pkgs.python3.version;
-            inherit (pkgs.python3Packages) buildPythonPackage;
-
-            inherit (pkgs.python3Packages) joblib pytest future numpy scikit-learn;
-          };
+          mdp-toolkit = import ./mdp-toolkit/default.nix ;
 
         }
       );
