@@ -1,21 +1,21 @@
 {
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-23.11";
-    flake-utils.url = "github:numtide/flake-utils";
+    nixpkgs.url = "nixpkgs/nixpkgs-unstable";
   };
-  outputs = { self, nixpkgs, flake-utils }:
-    flake-utils.lib.eachDefaultSystem
-      (system:
-        let
-          pkgs = import nixpkgs {
-            inherit system;
-          };
-        in
-        with pkgs;
-        {
+  outputs = {
+      self,
+      nixpkgs,
+  }:
+  let 
+    systems = [
+      "x86_64-linux"
+    ];
+    forEachSystem = nixpkgs.lib.genAttrs systems;
 
-          mdp-toolkit = import ./mdp-toolkit/default.nix ;
-
-        }
-      );
+    pkgsForEach = nixpkgs.legacyPackages;
+  in {
+    packages = forEachSystem (system: {
+      mdp-toolkit = import ./mdp-toolkit/default.nix ;
+    });
+  };
 }
